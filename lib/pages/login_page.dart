@@ -1,11 +1,14 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:chat_app/helpers/mostrar_alerta.dart';
+import 'package:chat_app/services/auth_service.dart';
 import 'package:chat_app/widgets/boton_azul.dart';
 import 'package:chat_app/widgets/custom_input.dart';
 import 'package:chat_app/widgets/custom_logo.dart';
 import 'package:chat_app/widgets/label.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:provider/provider.dart';
 
 
 class LoginPage extends StatelessWidget {
@@ -56,6 +59,7 @@ class __FormState extends State<_Form> {
 
   @override
   Widget build(BuildContext context) {
+    final authService = Provider.of<AuthService>(context);
     return Container(
       margin: EdgeInsets.only(top: 40),
       padding: EdgeInsets.symmetric(horizontal: 50),
@@ -76,7 +80,18 @@ class __FormState extends State<_Form> {
           ),
           BotonAzul(
             texto: 'Login',
-            funcion: () => _imprimir
+            autenticando: authService.autenticando,
+            funcion: () async {
+
+               FocusScope.of(context).unfocus();
+               final loginOk = await authService.login(emailController.text.trim(), passwordController.text.trim());
+
+               if(loginOk){
+                 Navigator.pushReplacementNamed(context, 'usuarios');
+               }else{
+                 mostrarAlerta(context, 'Login incorrecto', 'Revise sus credenciales');
+               }
+            } 
           )
         ],
       ),
@@ -84,8 +99,9 @@ class __FormState extends State<_Form> {
   }
 
   void _imprimir() {
-      print('Email: ${emailController.text}');
-      print('Pass: ${passwordController.text}');
+
+      
+      
             
   }
 }

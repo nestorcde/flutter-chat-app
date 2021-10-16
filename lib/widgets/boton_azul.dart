@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 class BotonAzul extends StatelessWidget {
   final String texto;
   final Function funcion;
+  final bool autenticando;
   const BotonAzul({ 
     Key? key, 
     required this.texto, 
-    required this.funcion 
+    required this.funcion, 
+    required this.autenticando 
     }) : super(key: key);
 
   @override
@@ -18,7 +20,8 @@ class BotonAzul extends StatelessWidget {
               elevation: 2,
               shape: StadiumBorder()
             ),
-            onPressed: funcion(), 
+            onPressed: this.autenticando ? null : () => this.funcion(), 
+            
             child: Container(
               child: Center(
                 child: Text(

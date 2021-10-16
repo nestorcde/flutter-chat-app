@@ -10,4 +10,18 @@ class Usuario {
     required this.nombre,
     required this.uid
   });
+
+  factory Usuario.fromJson(Map<String, dynamic> json) => Usuario(
+      nombre: json["nombre"],
+      email: json["email"],
+      online: json["online"],
+      uid: json["uid"],
+  );
+
+  Map<String, dynamic> toJson() => {
+      "nombre": nombre,
+      "email": email,
+      "online": online,
+      "uid": uid,
+  };
 }
