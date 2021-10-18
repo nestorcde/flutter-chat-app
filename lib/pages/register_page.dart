@@ -86,7 +86,7 @@ class __FormState extends State<_Form> {
           ),
           BotonAzul(
             autenticando: authService.autenticando,
-            texto: 'Login',
+            texto: 'Registrarse',
             funcion: () async {
               FocusScope.of(context).unfocus();
                final registroOk = await authService.signIn(nombreController.text.trim(), emailController.text.trim(), passwordController.text.trim());

@@ -137,12 +137,12 @@ class _ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
               child: Platform.isIOS ?
               CupertinoButton(
                 child: Text('Enviar'), 
-                onPressed: (){}
+                onPressed: () => _handleSubmit(_textController.text), 
               ):
               Container(
                 margin: EdgeInsets.symmetric(horizontal: 4.0),
                 child: IconButton(
-                  onPressed: (){}, 
+                  onPressed: () => _handleSubmit(_textController.text), 
                   icon: Icon(Icons.send )
                 )
               )
