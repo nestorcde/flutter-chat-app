@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:chat_app/helpers/mostrar_alerta.dart';
+import 'package:chat_app/services/socket_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:provider/provider.dart';
@@ -60,6 +61,7 @@ class __FormState extends State<_Form> {
   @override
   Widget build(BuildContext context) {
     final authService = Provider.of<AuthService>(context);
+    final socketService = Provider.of<SocketService>(context);
     return Container(
       margin: EdgeInsets.only(top: 40),
       padding: EdgeInsets.symmetric(horizontal: 50),
@@ -91,6 +93,7 @@ class __FormState extends State<_Form> {
 
                if(registroOk == true){
                  Navigator.pushReplacementNamed(context, 'usuarios');
+                 socketService.connect();
                }else{
                  mostrarAlerta(context, 'Registro incorrecto', registroOk);
                }
